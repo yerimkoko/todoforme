@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +35,20 @@ public class TodoService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 되는 게시물이 없습니다. id + " + id));
         todo.update(dto.getContent());
         return new TodoResponseDto();
-
     }
+
+    @Transactional
+    public List<TodoResponseDto> retrieveALlTodoBoard() {
+        List<Todo> todoList = repository.findAll();
+        return todoList.stream()
+                .map(TodoResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public TodoResponseDto removeTodo(Long id) {
+        repository.deleteById(id);
+        return new TodoResponseDto();
+    }
+
 }

@@ -22,7 +22,6 @@ class TodoServiceTest {
     @AfterEach
     public void cleanUp() {
         repository.deleteAll();
-        ;
     }
 
     @Test
@@ -66,6 +65,24 @@ class TodoServiceTest {
         Todo getTodo = repository.findAll().get(0);
         assertThat(getTodo.getContent()).isEqualTo(dto.getContent());
     }
+
+    @Test
+    void todo에_게시물을_삭제한다() {
+        //given
+        String content = "애슐리 가기";
+        Long memberId = 1L;
+
+        repository.save(Todo.builder()
+                .content(content)
+                .memberId(memberId)
+                .build());
+        //when
+        todoService.removeTodo(memberId);
+
+        //then
+        assertThat(repository.findAll()).isEmpty();
+    }
+
 
 
 }

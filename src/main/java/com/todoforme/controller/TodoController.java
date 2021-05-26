@@ -7,6 +7,8 @@ import com.todoforme.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class TodoController {
@@ -33,6 +35,14 @@ public class TodoController {
         return todoService.reviseTodo(id, dto);
     }
 
+    @DeleteMapping("/api/v1/todo/{id}")
+    public TodoResponseDto removeTodo(@PathVariable Long id) {
+        return todoService.removeTodo(id);
+    }
 
+    @GetMapping("/api/v1/todo")
+    public ApiResponse<List<TodoResponseDto>> retriveBoard() {
+        return ApiResponse.success(todoService.retrieveALlTodoBoard());
+    }
 
 }

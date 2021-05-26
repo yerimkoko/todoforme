@@ -13,10 +13,8 @@ public class TodoResponseDto {
     private String content;
 
     public TodoResponseDto(Todo todo) {
-
         this.id = todo.getId();
         this.content = todo.getContent();
-
     }
 
 }
