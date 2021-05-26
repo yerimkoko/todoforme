@@ -21,23 +21,24 @@ public class TodoController {
     }
 
     @PostMapping("/api/v1/todo")
-    public Long saveBoard(@RequestBody TodoRequestDto dto) {
-        return todoService.save(dto);
+    public ApiResponse<Long> saveBoard(@RequestBody TodoRequestDto dto) {
+        return ApiResponse.success(todoService.save(dto));
     }
 
     @GetMapping("/api/v1/todo/{id}")
-    public TodoResponseDto retrieveTodo(@PathVariable Long id) {
-        return todoService.retrieveTodo(id);
+    public ApiResponse<TodoResponseDto> retrieveTodo(@PathVariable Long id) {
+        return ApiResponse.success(todoService.retrieveTodo(id));
     }
 
     @PutMapping("/api/v1/todo/{id}")
-    public TodoResponseDto updateTodo(@PathVariable Long id, @RequestBody TodoRequestDto dto) {
-        return todoService.reviseTodo(id, dto);
+    public ApiResponse<TodoResponseDto> updateTodo(@PathVariable Long id, @RequestBody TodoRequestDto dto) {
+        return ApiResponse.success(todoService.reviseTodo(id, dto));
     }
 
     @DeleteMapping("/api/v1/todo/{id}")
-    public TodoResponseDto removeTodo(@PathVariable Long id) {
-        return todoService.removeTodo(id);
+    public ApiResponse<String> removeTodo(@PathVariable Long id) {
+        todoService.removeTodo(id);
+        return ApiResponse.OK;
     }
 
     @GetMapping("/api/v1/todo")

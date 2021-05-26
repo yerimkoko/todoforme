@@ -46,9 +46,8 @@ public class TodoService {
     }
 
     @Transactional
-    public TodoResponseDto removeTodo(Long id) {
+    public void removeTodo(Long id) {
         repository.deleteById(id);
-        return new TodoResponseDto();
     }
 
 }
