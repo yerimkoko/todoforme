@@ -1,6 +1,5 @@
 package com.todoforme.controller;
 
-import com.todoforme.domain.Todo;
 import com.todoforme.dto.TodoRequestDto;
 import com.todoforme.dto.TodoResponseDto;
 import com.todoforme.service.TodoService;
@@ -45,5 +44,6 @@ public class TodoController {
     public ApiResponse<List<TodoResponseDto>> retriveBoard() {
         return ApiResponse.success(todoService.retrieveALlTodoBoard());
     }
+
 
 }
